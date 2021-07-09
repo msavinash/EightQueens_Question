@@ -4,14 +4,14 @@ public class GameStrategy {
 
 	private int getColumn(int cellId) {
 		// WRITE YOUR LOGIC HERE...................................		
-
-		return 0;	// just for the heck of it
+		return cellId%8;
+//		return 0;	// just for the heck of it
 	}
 	
 	private int getRow(int cellId) {
 		// WRITE YOUR LOGIC HERE....................................
-		
-		return 0;	// just for the heck of it
+		return ((cellId-(cellId%8))/8);
+//		return 0;	// just for the heck of it
 	}
 
 	public boolean isValidPosition(int cellId) {
@@ -29,6 +29,45 @@ public class GameStrategy {
 			WRITE YOUR LOGIC HERE...............................
 
 		*/
+		for(int i=0;i<8;i++) {
+			if(row+i<8 && col+i<8 && placedQueens[row+i][col+i]==true) {
+				isValid=false;
+				break;
+			}
+			else if(row-i>=0 && col-i>=0 && placedQueens[row-i][col-i]==true) {
+				isValid=false;
+				break;
+			}
+			else if(row+i<8 && col-i>=0 && placedQueens[row+i][col-i]==true) {
+				isValid=false;
+				break;
+			}
+			else if(row-i>=0 && col+i<8 && placedQueens[row-i][col+i]==true) {
+				isValid=false;
+				break;
+			}
+			if(col+i<8 && placedQueens[row][col+i]==true) {
+				isValid=false;
+				break;
+			}
+			else if(col-i>=0 && placedQueens[row][col-i]==true) {
+				isValid=false;
+				break;
+			}
+			else if(row+i<8 && placedQueens[row+i][col]==true) {
+				isValid=false;
+				break;
+			}
+			else if(row-i>=0 && placedQueens[row-i][col]==true) {
+				isValid=false;
+				break;
+			}
+		
+			}
+		if(isValid==true) {
+			placedQueens[row][col]=true;
+			numQueens++;
+		}
 		return isValid;
 	}
 }
